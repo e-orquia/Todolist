@@ -36,8 +36,8 @@
             </div>
             <p>{{ todo.description }}</p>
             <div class="todo-actions">
-                <a href="{% url 'todo_update' todo.pk %}" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</a>
-                <a href="{% url 'todo_delete' todo.pk %}" class="btn btn-delete"><i class="fas fa-trash"></i> Delete</a>
+                <a href="{% url 'todo_update' todo.pk %}" class="btn btn-edit"><i class="fas fa-edit"></i></a>
+                <a href="{% url 'todo_delete' todo.pk %}" class="btn btn-delete"><i class="fas fa-trash"></i></a>
             </div>
         </div>
         {% endfor %}
