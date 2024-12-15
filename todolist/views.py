@@ -3,8 +3,15 @@ from .models import Todo
 from .forms import TodoForm
 
 def todo_list(request):
-    todos = Todo.objects.all().order_by('-created_at')
-    return render(request, 'todo_list.html', {'todos': todos})
+    query = request.GET.get('q')  
+    if query:
+        todos = Todo.objects.filter(title__icontains=query).order_by('-created_at')  # Filter todos batay sa search query
+    else:
+        todos = Todo.objects.all().order_by('-created_at')
+    message = "No matching todos found." if query and not todos else None
+    return render(request, 'todo_list.html', {'todos': todos, 'query': query, 'message': message})
+
+
 
 def todo_create(request):
     if request.method == 'POST':
@@ -20,6 +27,9 @@ def todo_update(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == 'POST':
         form = TodoForm(request.POST, instance=todo)
+        todo.completed = 'completed' in request.POST
+        todo.save()
+        return redirect('todo_list')
         if form.is_valid():
             form.save()
             return redirect('todo_list')
@@ -33,4 +43,4 @@ def todo_delete(request, pk):
     if request.method == 'POST':
         todo.delete()
         return redirect('todo_list')
-    return render(request, 'todo_confirm_delete.html', {'todo': todo})
+    return render(request, 'todo_delete.html', {'todo': todo})
