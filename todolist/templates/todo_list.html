@@ -4,13 +4,14 @@
     <div class="greetings">
         {% with current_hour=now.hour %}
             {% if current_hour < 12 %}
-                <h1>Good morning!</h1>
+                <h1>Good morning, {{ user.username }}!</h1>
             {% elif current_hour < 18 %}
-                <h1>Good afternoon!</h1>
+                <h1>Good afternoon, {{ user.username }}!</h1>
             {% else %}
-                <h1>Good evening!</h1>
+                <h1>Good evening, {{ user.username }}!</h1>
             {% endif %}
         {% endwith %}
+       
     </div>
     <div class="search-bar">
         <form method="get" action="{% url 'todo_list' %}">

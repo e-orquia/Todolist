@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Todo
 from .forms import TodoForm
 
+@login_required
 def todo_list(request):
     query = request.GET.get('q')  
     if query:
@@ -11,8 +13,7 @@ def todo_list(request):
     message = "No matching todos found." if query and not todos else None
     return render(request, 'todo_list.html', {'todos': todos, 'query': query, 'message': message})
 
-
-
+@login_required
 def todo_create(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
@@ -23,6 +24,7 @@ def todo_create(request):
         form = TodoForm()
     return render(request, 'todo_form.html', {'form': form})
 
+@login_required
 def todo_update(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == 'POST':
@@ -37,7 +39,7 @@ def todo_update(request, pk):
         form = TodoForm(instance=todo)
     return render(request, 'todo_form.html', {'form': form})
 
-
+@login_required
 def todo_delete(request, pk):
     todo = Todo.objects.get(pk=pk)
     if request.method == 'POST':
