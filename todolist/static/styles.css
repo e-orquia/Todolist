@@ -3,50 +3,52 @@ body {
     background-color: #f0f0f5;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   ;
     min-height: 100vh;
 }
 
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: 20px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
+/* Navbar styling */
 .navbar {
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
-    padding: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
+    background-color: #004080; 
+    padding: 0; 
+    height: 60px;
+    width: 100%;
+    color: white;
 }
 
-.navbar h1 {
-    font-size: 26px;
-    margin: 0;
-    letter-spacing: 1px;
+.logo-img {
+    height: 100px; 
+    margin-left: 10px;
 }
 
-.navbar .btn-add {
-    background-color: #ff6f61;
+.navbar a {
     color: white;
     text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    margin-right: 10px; 
+    transition: color 0.3s ease;
 }
 
-.navbar .btn-add:hover {
-    background-color: #e55d50;
-    transform: translateY(-2px);
+.navbar a:hover {
+    color: #ffcc00; 
+}
+
+.btn-add {
+    background-color: #e74c3c; /* Red button */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+    background-color: #c0392b; /* Darker red on hover */
 }
 
 .content {
@@ -134,12 +136,17 @@ body {
 }
 
 .add-form-container {
-    max-width: 600px;
+    max-width: 1000px;
     margin: 20px auto;
+    width: 45%;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.add-form-container h2 {
+    color: #004080;
+    text-align: center;
 }
 
 .form-group {
@@ -161,14 +168,14 @@ body {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ced4da;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
 .form-group textarea {
-    height: 100px;
+    height: 150px;
     resize: none;
 }
 
@@ -308,56 +315,61 @@ body {
     text-decoration: line-through;
     opacity: 0.7;
 }
-
+/* Header Container */
 .header-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 1rem;
-    padding: 20px;
+    justify-content: space-between;
+    
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
 }
 
-.greetings h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-    color: #343a40;
+/* Container for Add Button and Search */
+.search-add-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
 }
 
-.search-bar form {
+/* Search Bar */
+.search-bar {
     display: flex;
     align-items: center;
 }
 
-.search-bar input {
-    width: 250px;
-    padding: 10px;
-    border: 1px solid #ced4da;
+.search-bar input[type="text"] {
+    padding: 12px 20px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    margin-right: 5px;
 }
 
-.search-bar select {
-    padding: 10px;
-    margin-left: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #ffffff;
-}
-
-.search-bar button {
-    padding: 10px 20px;
-    margin-left: 10px;
+.btn-search {
     background-color: #007bff;
+    color: #fff;
     border: none;
+    padding:  10px 20px;
     border-radius: 4px;
-    color: white;
-    font-size: 16px;
     cursor: pointer;
 }
 
-.search-bar button:hover {
+.btn-search:hover {
     background-color: #0056b3;
+}
+
+/* Add Todo Button */
+.btn-add {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+    background-color: #c0392b;
 }

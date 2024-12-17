@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 {% block content %}
 <div class="header-container">
+    <!-- Greetings Section -->
     <div class="greetings">
         {% with current_hour=now.hour %}
             {% if current_hour < 12 %}
@@ -11,14 +12,20 @@
                 <h1>Good evening, {{ user.username }}!</h1>
             {% endif %}
         {% endwith %}
-       
     </div>
-    <div class="search-bar">
-        <form method="get" action="{% url 'todo_list' %}">
-            <input type="text" name="q" placeholder="Search todos" >
-            <button type="submit">Search</button>
+    
+
+    <!-- Search Bar and Add Todo Button -->
+    <div class="search-add-container">
+        <a href="{% url 'todo_create' %}" class="btn btn-add">+ Add Todo</a>
+        <form method="get" action="{% url 'todo_list' %}" class="search-bar">
+            <input type="text" name="q" placeholder="Search todos">
+            <button type="submit" class="btn btn-search">Search</button>
         </form>
     </div>
+</div>
+
+
 </div>
 
 <div class="todo-container">    

@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="add-form-container">
-    <h2>{{ form.instance.pk|yesno:"Update TODO,Create TODO" }}</h2>
+    <h2>{{ form.instance.pk|yesno:"UPDATE TODO INFORMATION,CREATE TODO INFORMATION" }}</h2>
     <form method="post">
         {% csrf_token %}
         <div class="form-group">

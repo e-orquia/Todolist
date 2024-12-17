@@ -1,14 +1,112 @@
-{% extends 'index.html' %}
-
+{% load static %}
 {% block content %}
-<h2>Register</h2>
-<form method="post" class="add-form-container">
-    {% csrf_token %}
-    <div class="form-group">
-        {{ form.as_p }}
-    </div>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    </head>
 
-    <button type="submit">Register</button>
-</form>
-<a href="{% url 'login' %}">Log in</a>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-image: url("{% static 'assets/bg1.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins';
+        }
+
+        .register-form {
+            text-align: center;
+            max-width: 320px;
+            padding: 40px;
+            border-radius: 10px;
+            color: white;
+            width: 100%;
+        }
+
+        .register-logo {
+            width: 200px;
+            margin-top: -4rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid white;
+            background-color: transparent;
+            color: white;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .input-field:focus {
+            border: 1px solid #d9e3f0;
+        }
+
+        .input-field::placeholder {
+            color: white;
+            opacity: 0.8;
+        }
+
+        .register-button {
+            padding: 14px;
+            width: 100%;
+            background: white;
+            color: #0022a0;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-button:hover {
+            background: #d9e3f0;
+        }
+
+        .login-link {
+            margin-top: 10px;
+        }
+
+        .login-link a {
+            color: white;
+            font-style: italic;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .login-link a:hover {
+            color: #ffd700;
+        }
+
+        ul.errorlist, .helptext {
+            display: none;
+        }
+    </style>
+
+    <form method="post" class="register-form">
+        <img src="{% static 'assets/logo.png' %}" alt="Logo" class="register-logo">
+
+        {% csrf_token %}
+        <div class="form-group">
+            {% comment %} {{ form.as_p }} {% endcomment %}
+            <input type="text" name="username" id="id_username" class="input-field" placeholder="USERNAME">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password1" id="id_password1" class="input-field" placeholder="PASSWORD">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password2" id="id_password2" class="input-field" placeholder="CONFIRM PASSWORD">
+        </div>
+        <button type="submit" class="register-button">REGISTER</button>
+        <div class="login-link">
+            <p style="display: inline; margin: 0;">Already have an account?</p>
+            <a href="{% url 'login' %}" style="display: inline; margin-left: 5px;">Login here</a>
+        </div>
+    </form>
 {% endblock %}

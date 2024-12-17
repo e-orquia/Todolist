@@ -2,16 +2,20 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Todo
 from .forms import TodoForm
+from django.utils import timezone
+
+
 
 @login_required
 def todo_list(request):
+    current_time = timezone.localtime(timezone.now())  
     query = request.GET.get('q')  
     if query:
         todos = Todo.objects.filter(title__icontains=query).order_by('-created_at')  # Filter todos batay sa search query
     else:
         todos = Todo.objects.all().order_by('-created_at')
     message = "No matching todos found." if query and not todos else None
-    return render(request, 'todo_list.html', {'todos': todos, 'query': query, 'message': message})
+    return render(request, 'todo_list.html', {'todos': todos, 'query': query, 'message': message, 'now': current_time})
 
 @login_required
 def todo_create(request):
