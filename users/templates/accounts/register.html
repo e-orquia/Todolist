@@ -87,21 +87,39 @@
         ul.errorlist, .helptext {
             display: none;
         }
+        .alert.alert-danger {
+            color: white;
+            background-color: #f44336;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 12px; 
+            max-width: 400px; 
+            margin: 10px auto;
+        }
+        .alert.alert-danger ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+                
     </style>
     <form method="post" class="register-form">
         <img src="{% static 'assets/logo.png' %}" alt="Logo" class="register-logo">
     
         {% csrf_token %}
         {% if form.errors %}
-    <ul>
-    {% for field in form %}
-        {% for error in field.errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-    {% endfor %}
-    </ul>
-{% endif %}
-
+        <div class="alert alert-danger" role="alert">
+            <ul class="mb-0">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
     
         <div class="form-group">
             <input type="text" name="username" id="id_username" class="input-field" placeholder="USERNAME" >

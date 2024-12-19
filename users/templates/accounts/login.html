@@ -82,22 +82,67 @@
         .register-link a:hover {
             color: #ffd700;
         }
+        .error-message p {
+            color: red;
+            font-size: 5px;
+            margin: 5px 0;
+        }
+        .alert.alert-danger {
+            color: white;
+            background-color: #f44336;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 10px; 
+            max-width: 400px; 
+            margin: 10px auto;
+        }
+        
+        
     </style>
 
     <form method="post" class="login-form">
         <img src="{% static 'assets/logo.png' %}" alt="Logo" class="login-logo">
-
+    
         {% csrf_token %}
+        
+        <!-- Display non-field errors -->
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
         <div class="form-group">
             <input type="text" name="username" placeholder="USERNAME" class="input-field">
+            <!-- Display username field errors -->
+            {% if form.username.errors %}
+            <div class="error-message">
+                {% for error in form.username.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
+        
         <div class="form-group">
             <input type="password" name="password" placeholder="PASSWORD" class="input-field">
+            <!-- Display password field errors -->
+            {% if form.password.errors %}
+            <div class="error-message">
+                {% for error in form.password.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
+        
         <button type="submit" class="login-button">LOGIN</button>
         <div class="register-link">
             <p style="display: inline; margin: 0;">Don't have an account?</p>
             <a href="{% url 'register' %}" style="display: inline; margin-left: 5px;">Register here</a>
         </div>
     </form>
+    
 {% endblock %}
