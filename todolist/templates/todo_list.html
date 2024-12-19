@@ -3,15 +3,7 @@
 <div class="header-container">
     <!-- Greetings Section -->
     <div class="greetings">
-        {% with current_hour=now.hour %}
-            {% if current_hour < 12 %}
-                <h1>Good morning, {{ user.username }}!</h1>
-            {% elif current_hour < 18 %}
-                <h1>Good afternoon, {{ user.username }}!</h1>
-            {% else %}
-                <h1>Good evening, {{ user.username }}!</h1>
-            {% endif %}
-        {% endwith %}
+                <h1>Hello, {{ user.username }}!</h1>
     </div>
     
 
