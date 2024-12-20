@@ -32,20 +32,26 @@ def todo_create(request):
 @login_required
 def todo_update(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
+
     if request.method == 'POST':
         form = TodoForm(request.POST, instance=todo)
+        todo.completed = 'completed' in request.POST  
+        todo.save()
         if form.is_valid():
-            todo = form.save(commit=False)  
-            todo.completed = 'completed' in request.POST
-            todo.save() 
-            return redirect('todo_list')
+            form.save()
+        return redirect('todo_list')  
     else:
-        form = TodoForm(instance=todo)
-    return render(request, 'todo_form.html', {'form': form})
+        form = TodoForm(instance=todo)  
+
+    return render(request, 'todo_form.html', {'form': form, 'todo': todo})
+
+
+
+
 
 @login_required
 def todo_delete(request, pk):
-    todo = Todo.objects.get(pk=pk)
+    todo = Todo.objects.get(pk=pk) 
     if request.method == 'POST':
         todo.delete()
         return redirect('todo_list')
