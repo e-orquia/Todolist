@@ -11,18 +11,19 @@ def todo_list(request):
     current_time = timezone.localtime(timezone.now())  
     query = request.GET.get('q')  
     if query:
-        todos = Todo.objects.filter(title__icontains=query).order_by('-created_at')  # Filter todos batay sa search query
+        todos = Todo.objects.filter(title__icontains=query).order_by('-created_at')  
     else:
         todos = Todo.objects.all().order_by('-created_at')
     message = "No matching todos found." if query and not todos else None
     return render(request, 'todo_list.html', {'todos': todos, 'query': query, 'message': message, 'now': current_time})
-
 @login_required
 def todo_create(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
-            form.save()
+            todo = form.save(commit=False)
+            todo.user = request.user
+            todo.save()
             return redirect('todo_list')
     else:
         form = TodoForm()
@@ -33,11 +34,10 @@ def todo_update(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == 'POST':
         form = TodoForm(request.POST, instance=todo)
-        todo.completed = 'completed' in request.POST
-        todo.save()
-        return redirect('todo_list')
         if form.is_valid():
-            form.save()
+            todo = form.save(commit=False)  
+            todo.completed = 'completed' in request.POST
+            todo.save() 
             return redirect('todo_list')
     else:
         form = TodoForm(instance=todo)

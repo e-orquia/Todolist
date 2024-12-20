@@ -9,7 +9,7 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect to login after successful registration
+            return redirect('login') 
     else:
         form = UserCreationForm()
 
@@ -25,7 +25,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Welcome, {username}!")
-                return redirect('todo_list')  # Replace 'home' with your desired redirect URL
+                return redirect('todo_list')  
             else:
                 messages.error(request, "Invalid username or password.")
         else:
